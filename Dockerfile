@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 5000
 
 # Lệnh khởi chạy ứng dụng Flask
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
