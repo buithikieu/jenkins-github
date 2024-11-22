@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "kieubui112543/test_cicd:v1" // Thay bằng Docker Hub username/repo
+        DOCKER_CREDENTIALS_ID = "github"
     }
     stages {
         stage('CLONE GIT') {
@@ -17,15 +18,12 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
+       stage('Push Image to Docker Hub') {
             steps {
                 script {
-                    // Đăng nhập Docker Hub
-                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'kieubui112543', passwordVariable: 'Minhtri@2492022')]) {
-                        bat 'docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%'
+                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+                        docker.image(DOCKER_IMAGE).push()
                     }
-                    // Push Docker image lên Docker Hub
-                    bat "docker push %DOCKER_IMAGE%"
                 }
             }
         }
