@@ -4,9 +4,9 @@ pipeline {
         DOCKER_IMAGE = "kieubui112543/test_cicd:v1" // Thay bằng Docker Hub username/repo
     }
     stages {
-        stage('Clone') {
+        stage('CLONE GIT') {
             steps {
-                git 'https://github.com/buithikieu/jenkins-github.git'
+                git url: 'https://github.com/buithikieu/jenkins-github.git', branch: 'main'
             }
         }
         stage('Build Docker Image') {
