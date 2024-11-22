@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Đăng nhập Docker Hub
-                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'kieubui112543', passwordVariable: 'Minhtri@2492022')]) {
                         bat 'docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%'
                     }
                     // Push Docker image lên Docker Hub
