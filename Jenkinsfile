@@ -18,16 +18,17 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-    steps {
-        script {
-            // Đăng nhập Docker Hub
-            withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'kieubui112543', passwordVariable: 'Minhtri@2492022')]) {
-                bat 'echo %DOCKERHUB_PASSWORD% | docker login -u %DOCKERHUB_USERNAME% --password-stdin'
+            steps {
+                script {
+                    // Đăng nhập Docker Hub
+                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'kieubui112543', passwordVariable: 'Minhtri@2492022')]) {
+                        bat 'echo %DOCKERHUB_PASSWORD% | docker login -u %DOCKERHUB_USERNAME% --password-stdin'
+                    }
+                    // Push Docker image lên Docker Hub
+                    bat "docker push %DOCKER_IMAGE%"
+                }
             }
-            // Push Docker image lên Docker Hub
-            bat "docker push %DOCKER_IMAGE%"
         }
-    }
         stage('Deploy Docker Image') {
             steps {
                 script {
