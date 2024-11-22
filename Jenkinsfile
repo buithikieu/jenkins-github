@@ -34,7 +34,7 @@ pipeline {
                     // Pull Docker image từ Docker Hub
                     bat "docker pull %DOCKER_IMAGE%"
                     // Dừng container đang chạy (nếu có) và xóa nó
-                    bat "docker stop test_cicd || echo Container not running && docker rm my-app || echo No container to remove"
+                    bat "docker stop test_cicd || echo Container not running && docker rm test_cicd || echo No container to remove"
                     // Chạy container từ image mới nhất
                     bat "docker run -d --test_cicd -p 5000:5000 %DOCKER_IMAGE%"
                 }
