@@ -35,7 +35,7 @@ pipeline {
                     bat "docker pull %DOCKER_IMAGE%"
                     // Dừng container đang chạy (nếu có) và xóa nó
                     // Chạy container từ image mới nhất
-                    bat "docker run -d --kieubui112543/test_cicd:v1 -p 5000:5000 %DOCKER_IMAGE%"
+                    bat "docker run -p 5000:5000 %DOCKER_IMAGE%"
                 }
             }
         }
