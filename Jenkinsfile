@@ -18,14 +18,16 @@ pipeline {
                 }
             }
         }
-       stage('Push Image to Docker Hub') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        docker.image(DOCKER_IMAGE).push()
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        bat 'docker login -u "%DOCKERHUB_USERNAME%" -p "%DOCKERHUB_PASSWORD%"'
                     }
+                    bat "docker push %DOCKER_IMAGE%"
                 }
             }
+        }
         }
         stage('Deploy Docker Image') {
             steps {
