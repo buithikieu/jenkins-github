@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "kieubui112543/test_cicd:v1" // Thay bằng Docker Hub username/repo
-        DOCKER_CREDENTIALS_ID = "github"
+        DOCKER_CREDENTIALS_ID = "dockerhub"
     }
     stages {
         stage('CLONE GIT') {
